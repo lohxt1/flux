@@ -47,6 +47,8 @@ async function getSearches(query, vqd) {
     `https://links.duckduckgo.com/d.js?${queryString(queryObject)}`
   );
 
+  console.log(`https://links.duckduckgo.com/d.js?${queryString(queryObject)}`);
+
   if (response.body.includes("DDG.deep.is506"))
     throw new Error("A server error occurred!");
 
@@ -98,6 +100,7 @@ app.post("/ddg", async (req, res) => {
   const { query = "ufc 287", count = 3 } = req.body;
   const vqd = await getVQD(query);
   const sr = await getSearches(query, vqd);
+  // console.log(sr);
   res.json(sr.slice(0, count));
 });
 
